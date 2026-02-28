@@ -127,7 +127,6 @@ def generate_shot_t2v(
         "number_of_videos": 1,
         "duration_seconds": duration,
         "resolution": RESOLUTION,
-        "negative_prompt": NEGATIVE_PROMPT,
     }
     if char_refs:
         config_kwargs["reference_images"] = char_refs

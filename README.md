@@ -71,3 +71,96 @@ shots:
 
 
 ***
+
+## 4. Getting Started
+
+### **Prerequisites**
+- Python 3.10+
+- Google Cloud Project with Vertex AI API enabled (for Veo) or Gemini API Key.
+- `ffmpeg` installed (required by MoviePy and for frame extraction).
+
+### **Installation**
+1. Clone the repository:
+   ```bash
+   git clone <repo_url>
+   cd inu
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Set up environment variables:
+   Create a `.env` file in the root directory:
+   ```env
+   GOOGLE_API_KEY=your_api_key_here
+   GOOGLE_GENAI_USE_VERTEXAI=false # Set to true if using Vertex AI
+   GOOGLE_CLOUD_PROJECT=your_project_id # Required if using Vertex AI
+   GOOGLE_CLOUD_LOCATION=us-central1   # Required if using Vertex AI
+   ```
+
+---
+
+## 5. How to Create a Video (Step-by-Step)
+
+### **Step 1: Generate a Story**
+Generate a 15-shot story plan based on an idea (or let AI invent one).
+This creates a YAML file in `stories/{video_id}/`.
+
+```bash
+# Usage: python story_generator.py --video_id <ID> --idea "Optional idea"
+python story_generator.py --video_id 1 --idea "The dogs go camping in the backyard"
+```
+*Output:* `stories/1/story1.yaml`
+
+### **Step 2: Generate Video Clips**
+Turn the story descriptions into actual video clips using Veo.
+This saves raw clips to `output/{video_id}/raw_clips/{story_name}/`.
+
+```bash
+# Usage: python video_generator.py --story <path_to_yaml>
+python video_generator.py --story stories/1/story1.yaml
+```
+*Output:* `output/1/raw_clips/story1/1.mp4`, `2.mp4`, ...
+
+### **Step 3: Assemble Clips into a Story Video**
+Stitch the raw clips together, add background music, and apply master volume.
+This creates a single video file for that specific story.
+
+```bash
+# Usage: python assembler.py --clips_dir <path_to_raw_clips>
+python assembler.py --clips_dir output/1/raw_clips/story1
+```
+*Output:* `output/1/story1.mp4`
+
+*(Repeat Steps 1-3 to create multiple stories, e.g., story2, story3)*
+
+### **Step 4: Create a Thumbnail (Optional)**
+Generate a YouTube thumbnail for the story.
+
+```bash
+# Usage: python thumbnail.py <path_to_story_yaml>
+python thumbnail.py stories/1/story1.yaml
+```
+*Output:* `output/1/story1_thumbnail.png`
+
+### **Step 5: Aggregate Stories into Final Video**
+Combine multiple story videos into one long-form video (e.g., 8 mins), inserting a "Subscribe" clip between them.
+
+1. Ensure you have the subscribe clip generated (run once):
+   ```bash
+   python subscribe.py
+   ```
+   *Output:* `output/subscribe.mp4`
+
+2. Run the aggregator:
+   ```bash
+   # Usage: python aggregate.py <video1> <video2> ... --output <final_path>
+   python aggregate.py output/1/story1.mp4 output/1/story2.mp4 --output output/1/final_video.mp4
+   ```
+   *Output:* `output/1/final_video.mp4`
+
