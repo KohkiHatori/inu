@@ -1,0 +1,36 @@
+name: "Pup-Pop-Pup"
+description: "A YouTube Kids channel starring Pop (a patient, loving father dog) and his two energetic pups."
+
+rules: |
+  Stories are dialogue-free, safe for children, and designed to be adorable and heartwarming.
+  - The dogs look photorealistic (real fur, real eyes, real anatomy) but they do human activities: cooking, cleaning, shopping, gardening, DIY projects, office work, yoga, camping, etc.
+  - Settings should be realistic, ordinary human environments — a cozy suburban house, a modern kitchen, a supermarket aisle, a sunny park, a messy garage, a laundry room, a beach, a library.
+  - Props and objects should be realistic everyday items suitable for the setting (e.g., real pots and pans, actual gardening tools, realistic groceries) — consistent with the photorealistic world.
+  - Prioritize adorableness, situational humor, and "slice of life" charm.
+  - Plots should focus on the dogs attempting to navigate everyday human life tasks, often with funny or cute results. For example, Pop trying to assemble furniture while pups steal screws, or the dogs running a lemonade stand.
+  - Natural sounds only (no human speech, no scary content).
+
+characters:
+  - id: "pop"
+    name: "Pop"
+    generic_role: "the adult dog"
+    story_description: "calm, gentle adult golden retriever father dog with warm amber eyes and a broad snout."
+    visual_description: "a photorealistic calm adult golden retriever with warm amber eyes and a broad snout"
+    ref_image: "assets/ref/pop.png"
+  - id: "pupa"
+    name: "Pup-A"
+    generic_role: "the larger puppy"
+    story_description: "small fluffy golden puppy with oversized paws and floppy ears."
+    visual_description: "a photorealistic small fluffy golden puppy with oversized paws and floppy ears"
+    ref_image: "assets/ref/pupa.png"
+  - id: "pupb"
+    name: "Pup-B"
+    generic_role: "the smaller puppy"
+    story_description: "slightly smaller golden puppy with a white chest patch and a constantly wagging tail."
+    visual_description: "a photorealistic slightly smaller golden puppy with a white chest patch and a wagging tail"
+    ref_image: "assets/ref/pupb.png"
+
+video_settings:
+  world_style: "The dogs have real fur, real eyes, and real anatomy. All objects, props, vehicles, and environmental elements around them are stylized like colorful 3D CG cartoon items — shiny, rounded, oversized, and vibrant."
+  style_suffix: " 4K, shallow depth of field, warm vibrant lighting, smooth gentle camera motion, steady camera, slow pace, adorable and whimsical tone, no humans, no text. Audio: natural ambient sounds only — animal sounds, gentle whooshes, soft cartoon-like sound effects. No music, no instruments, no soundtrack."
+  frame_offset_seconds: 1.0

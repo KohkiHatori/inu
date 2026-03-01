@@ -63,3 +63,4 @@ uritemplate==4.2.0
 urllib3==2.6.3
 websockets==15.0.1
 yarl==1.22.0
+jinja2

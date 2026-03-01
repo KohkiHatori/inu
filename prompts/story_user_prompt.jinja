@@ -1,0 +1,53 @@
+Format: {{ aspect_ratio }} video ({{ aspect_ratio }}, {{ shot_dur }}s per shot, {{ num_shots }} shots total, {{ total_dur }}s total).
+{{ idea_line }}
+
+Output ONLY a YAML block (fenced with ```yaml ... ```) with these fields:
+- title: string
+- concept: one-paragraph summary of the story
+- new_reference_images: a list of up to {{ dynamic_slots }} items to generate. Each item must have:
+    - id: a short string identifier (e.g., "blue_bicycle")
+    - description: a detailed visual description of the item for an image generator (e.g., "a shiny blue vintage bicycle with a woven front basket"). IF this is a prop or guest character, you MUST isolate it entirely on a plain white background. IF this is a background scenery/environment reference, you must describe the full landscape (e.g., "a wide view of a pristine mountain lake at sunset").
+- shots: a list of exactly {{ num_shots }} items, each with:
+    - id: integer 1-{{ num_shots }}
+      - mode: either "t2v" or "i2v".
+        - "t2v" = text-to-video with character reference images. Use for the FIRST shot of each scene/angle.
+        - "i2v" = image-to-video, continuing from the last frame of the previous shot. Use for continuation shots within a scene.
+        - Shot 1 MUST be "t2v".
+        - Start a new "t2v" scene every 2–3 shots.
+        - Do NOT use "i2v" for more than 2 consecutive shots (drift risk).
+    - reference_images: (For T2V shots ONLY) a list of strings containing exactly the IDs of visually present characters/objects in this shot.
+      - 1. You MUST ALWAYS include all channel character IDs ({% for char in channel.characters %}"{{ char.id }}"{% if not loop.last %}, {% endif %}{% endfor %}).
+      - 2. You may add up to {{ 3 - channel.characters|length }} IDs from `new_reference_images` to this list.
+      - MUST NOT exceed 3 items per shot.
+      - MUST only include objects/characters that are actually described in the description field.
+
+    - description: (use YAML literal block style "|" to avoid parsing issues with colons and special characters) a self-contained visual scene description suitable as an AI video generation prompt.
+    IMPORTANT: This story uses a hybrid generation strategy. Some shots are generated with text-to-video (T2V) using character reference images, and others use image-to-video (I2V) where the last frame of the previous shot becomes the first frame of the next. Write descriptions accordingly:
+
+    SCENE STRUCTURE: Organise the story into short scenes of 2–3 shots each.
+    - Shot 1 (T2V): Establish a new scene/angle/location. Use mode: "t2v".
+    - Shot 2 (I2V): Continue the action from Shot 1. Use mode: "i2v".
+    - Shot 3 (I2V/T2V): Optionally continue (I2V) or start a new scene (T2V).
+    - Shot 4 (T2V): MUST start a new scene/angle (if Shot 3 was I2V).
+    Goal: Change the visual angle or scene completely every 2–3 shots to maintain visual freshness and re-anchor character consistency. Avoid long chains of I2V.
+
+    - Do NOT use character names ({% for char in channel.characters %}{{ char.name }}{% if not loop.last %}, {% endif %}{% endfor %}). Instead use generic roles: {% for char in channel.characters %}"{{ char.generic_role }}"{% if not loop.last %}, {% endif %}{% endfor %}.
+
+    - EXPLICIT COUNT & IDENTITY: Always state the exact number of characters present to prevent hallucinations.
+    e.g., "The two puppies are playing while the adult dog watches (three dogs total)."
+    Reinforce the identity relationship: "The adult dog remains still while the smaller puppy moves."
+
+    - MOTION & STABILITY: Describe gentle, grounded movements. Avoid chaotic action, fast pacing, or complex physics.
+    Use phrases like "slowly lifts head", "gently wagging tail", "sitting calmly".
+    Keep the camera motion smooth and steady.
+
+    - T2V shots (mode: t2v) — these are the first shot of each new scene. Fully describe the setting, lighting, environment, props, and the position and appearance of all characters. Write the description as if the video model is seeing these characters for the first time.
+    - I2V shots (mode: i2v) — these continue a scene from the previous shot. Open with a brief continuity line referencing what each character was doing at the end of the previous shot (e.g. "Continuing from the previous frame where the adult dog was stirring batter at the counter and the two puppies were watching from the doorway — the adult dog now lifts the bowl..."). Do NOT re-describe the characters' physical appearance; the video model already has them from the starting frame.
+    - Every description (both T2V and I2V) must fully re-state the setting, environment details, lighting, color palette, and any relevant props.
+    - Do not include dialogue, text overlays, or narration.
+
+Be creative with plots. The characters should be doing relatable human activities in a realistic world. Props and objects should look realistic and detailed, matching the environment. The characters themselves must always be described as photorealistic. Make sure the {{ num_shots }} shots tell a coherent story arc with a beginning, middle, and satisfying end.
+
+OBJECT CONTINUITY RULE:
+- Within a scene (I2V shots): Any object/prop used in shot N must be visible in shot N-1. Introduce props early in the background before they are used.
+- SCENE SWITCH (T2V shots): When a new scene starts (mode: t2v), the camera angle and environment must change. However, you SHOULD carry key props or guest characters defined in `new_reference_images` across multiple different scenes! If a character acquires an item in Scene 1, they can carry or interact with it in Scene 2 (a new T2V shot). By reusing the same reference image IDs across multiple scenes, the video model guarantees perfect object consistency across the entire story.

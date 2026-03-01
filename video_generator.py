@@ -25,61 +25,21 @@ load_dotenv()
 
 USE_VERTEX = os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "false").lower() == "true"
 
+import prompt_builder
+
 MODEL = "veo-3.1-fast-generate-preview"
 RESOLUTION = "1080p"  # "720p" | "1080p" | "4k"
 
-# Character reference images — one per character, full-body 3/4 view on white background.
-# Set to None to skip for a character.
-REF_IMAGE_PATHS: list[str] = [
-    "assets/ref/pop.png",
-    "assets/ref/pupa.png",
-    "assets/ref/pupb.png",
-]
 
-HERO_PREFIX = (
-    "Characters: Pop, a photorealistic calm adult golden retriever with warm amber eyes "
-    "and a broad snout; Pup-A, a photorealistic small fluffy golden puppy with oversized "
-    "paws and floppy ears; Pup-B, a photorealistic slightly smaller golden puppy with a "
-    "white chest patch and a wagging tail. The dogs have real fur, real eyes, and real anatomy. "
-    "All objects, props, vehicles, and environmental elements around them are stylized like "
-    "colorful 3D CG cartoon items — shiny, rounded, oversized, and vibrant. "
-)
-
-STYLE_SUFFIX = (
-    " 4K, shallow depth of field, warm vibrant lighting, smooth gentle camera motion, "
-    "steady camera, slow pace, adorable and whimsical tone, no humans, no text. "
-    "Audio: natural ambient sounds only — animal sounds, gentle whooshes, soft cartoon-like "
-    "sound effects. No music, no instruments, no soundtrack."
-)
-
-NEGATIVE_PROMPT = "distorted, morphing, extra limbs, extra dogs, text, watermarks, blurry, shaky camera, fast motion, chaotic, human hands, human body"
-
-# Used for shots 2+ in I2V mode — replaces HERO_PREFIX entirely.
-# We omit character physical descriptions because the I2V starting frame already
-# establishes who the dogs are; re-describing them risks Veo generating new dogs
-# to match the text rather than continuing from the visual anchor.
-CONTINUATION_PREFIX = (
-    "Continuing directly from the previous frame. The exact same three dogs already shown "
-    "continue the scene — do not introduce any new characters or alter their appearance. "
-    "The dogs must remain photorealistic with real fur, real eyes, and real anatomy throughout. "
-    "All objects, props, vehicles, and environmental elements are stylized like "
-    "colorful 3D CG cartoon items — shiny, rounded, oversized, and vibrant. "
-)
-
-FORMAT_CONFIG = {
-    "normal": {"aspect_ratio": "16:9"},
-    "short":  {"aspect_ratio": "9:16"},
-}
 
 POLL_INTERVAL_SECONDS = 15
 DELAY_BETWEEN_SHOTS_SECONDS = 5
 MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 60
 MIN_VALID_BYTES = 1 * 1024 * 1024
-FRAME_OFFSET_SECONDS = 1.0
 
 
-def extract_last_frame(video_path: str, offset_from_end: float = FRAME_OFFSET_SECONDS) -> bytes:
+def extract_last_frame(video_path: str, offset_from_end: float) -> bytes:
     """Extract a frame near the end of a video using ffmpeg. Returns JPEG bytes."""
     result = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries", "format=duration",
@@ -95,13 +55,6 @@ def extract_last_frame(video_path: str, offset_from_end: float = FRAME_OFFSET_SE
         capture_output=True, check=True,
     )
     return frame_result.stdout
-
-
-def build_prompt(description: str, is_continuation: bool = False) -> str:
-    # For I2V shots, swap out HERO_PREFIX entirely for CONTINUATION_PREFIX so
-    # Veo doesn't try to generate fresh dogs to match a text description.
-    prefix = CONTINUATION_PREFIX if is_continuation else HERO_PREFIX
-    return f"{prefix}{description}{STYLE_SUFFIX}"
 
 
 def make_ref_image_config(image_bytes: bytes, mime_type: str) -> types.VideoGenerationReferenceImage:
@@ -144,6 +97,7 @@ def generate_shot_i2v(
     prompt: str,
     aspect_ratio: str,
     duration: int,
+    channel: dict,
     start_frame: bytes,
 ) -> bytes:
     """Image-to-video — the start_frame becomes the literal first frame."""
@@ -152,8 +106,9 @@ def generate_shot_i2v(
         "number_of_videos": 1,
         "duration_seconds": duration,
         "resolution": RESOLUTION,
-        "negative_prompt": NEGATIVE_PROMPT,
     }
+
+
     start_image = types.Image(
         image_bytes=base64.b64encode(start_frame).decode("utf-8"),
         mime_type="image/jpeg",
@@ -188,9 +143,9 @@ def _poll_and_download(client: genai.Client, operation):
 
 def process_story(
     story_path: str,
-    ref_image_paths: list[str],
+    channel_config: dict,
     shot_duration: int,
-    video_type: str,
+    aspect_ratio: str,
     start_shot: int = 1,
     end_shot: int | None = None,
 ) -> None:
@@ -203,25 +158,24 @@ def process_story(
     out_dir = Path("output") / video_id / "raw_clips" / story_name
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    aspect_ratio = FORMAT_CONFIG[video_type]["aspect_ratio"]
+
     client = genai.Client()
     all_shots = sorted(story["shots"], key=lambda s: s["id"])
     shots = [s for s in all_shots
              if s["id"] >= start_shot and (end_shot is None or s["id"] <= end_shot)]
 
     print(f"Generating {len(shots)} shots (frame-continuity mode) for '{story.get('title', story_name)}'")
-    print(f"  Type: {video_type} ({aspect_ratio}), Duration: {shot_duration}s/shot")
+    print(f"  Type: {aspect_ratio}, Duration: {shot_duration}s/shot")
     if start_shot > 1 or end_shot is not None:
         range_str = f"{start_shot}–{end_shot if end_shot is not None else 'end'}"
         print(f"  Shot range: {range_str}")
     print(f"  Output: {out_dir}/")
 
-    char_refs = []
-    for img_path in ref_image_paths:
-        mime = mimetypes.guess_type(img_path)[0] or "image/jpeg"
-        char_refs.append(make_ref_image_config(Path(img_path).read_bytes(), mime))
-    if char_refs:
-        print(f"  Character references: {len(char_refs)} image(s)")
+    # Map channel character IDs to their paths
+    channel_refs = {}
+    for char in channel_config.get("characters", []):
+        if "id" in char and "ref_image" in char:
+            channel_refs[char["id"]] = char["ref_image"]
 
     for shot in shots:
         shot_id = shot["id"]
@@ -233,13 +187,30 @@ def process_story(
 
         shot_mode = shot.get("mode", "t2v" if shot_id == 1 else "i2v")
 
+        # Determine Reference Images for this shot
+        char_refs = []
+        if shot_mode == "t2v" and "reference_images" in shot:
+            for ref_id in shot["reference_images"]:
+                # Check channel first
+                if ref_id in channel_refs:
+                    img_path = Path(channel_refs[ref_id])
+                else: # Otherwise check dynamic generation folder
+                    img_path = Path("assets") / "ref" / video_id / story_name / f"{ref_id}.png"
+
+                if img_path.exists():
+                    mime = mimetypes.guess_type(img_path)[0] or "image/jpeg"
+                    char_refs.append(make_ref_image_config(img_path.read_bytes(), mime))
+                else:
+                    print(f"  Shot {shot_id}: WARNING - Reference image '{ref_id}' not found at {img_path}")
+
         # I2V: extract last frame from previous shot; fall back to T2V if unavailable
         start_frame = None
         if shot_mode == "i2v":
             prev_path = out_dir / f"{shot_id - 1}.mp4"
             if prev_path.exists():
                 try:
-                    start_frame = extract_last_frame(str(prev_path))
+                    offset = channel_config.get("video_settings", {}).get("frame_offset_seconds", 1.0)
+                    start_frame = extract_last_frame(str(prev_path), offset)
                 except Exception as e:
                     print(f"  Shot {shot_id}: warning — frame extraction failed, falling back to T2V: {e}")
                     shot_mode = "t2v"
@@ -248,7 +219,11 @@ def process_story(
                 shot_mode = "t2v"
 
         is_continuation = (shot_mode == "i2v")
-        prompt = build_prompt(shot["description"], is_continuation=is_continuation)
+        if is_continuation:
+            prompt = prompt_builder.build_video_continuation_prompt(channel_config, shot["description"])
+        else:
+            prompt = prompt_builder.build_video_hero_prompt(channel_config, shot["description"])
+
         print(f"  Shot {shot_id}: generating ({shot_mode.upper()}{'+ref' if shot_mode == 't2v' and char_refs else ''})...")
 
         success = False
@@ -257,6 +232,7 @@ def process_story(
                 if shot_mode == "i2v":
                     video_file = generate_shot_i2v(
                         client, prompt, aspect_ratio, shot_duration,
+                        channel=channel_config,
                         start_frame=start_frame,
                     )
                 else:
@@ -296,10 +272,10 @@ def process_story(
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Generate video clips with frame-based continuity between shots.")
+    parser.add_argument("--channel", default=None, help="Override channel configuration.")
     parser.add_argument("--story", required=True, help="Path to the story YAML file.")
-    parser.add_argument("--shot_duration", default=8, type=int, help="Duration per shot in seconds.")
-    parser.add_argument("--type", default="normal", choices=["normal", "short"], dest="video_type",
-                        help="Video type: 'normal' (landscape 16:9) or 'short' (portrait 9:16).")
+    parser.add_argument("--shot_duration", default=None, type=int, choices=[4, 6, 8], help="Override duration per shot in seconds.")
+    parser.add_argument("--aspect_ratio", default=None, help="Override aspect ratio (e.g., 16:9).")
     parser.add_argument("--start_shot", default=1, type=int, help="Shot ID to start from (default: 1).")
     parser.add_argument("--end_shot", default=None, type=int, help="Shot ID to stop at, inclusive (default: last shot).")
     args = parser.parse_args()
@@ -308,13 +284,21 @@ def main() -> None:
         print(f"Error: story file not found: {args.story}", file=sys.stderr)
         sys.exit(1)
 
-    ref_images = [p for p in REF_IMAGE_PATHS if p is not None]
-    for img in ref_images:
-        if not Path(img).exists():
-            print(f"Error: reference image not found: {img}", file=sys.stderr)
-            sys.exit(1)
+    with open(args.story) as f:
+        story_data = yaml.safe_load(f)
 
-    process_story(args.story, ref_images, args.shot_duration, args.video_type, args.start_shot, args.end_shot)
+    metadata = story_data.get("metadata", {})
+    channel_name = args.channel or metadata.get("channel", "pup-pop-pup")
+    shot_duration = args.shot_duration or metadata.get("shot_duration", 8)
+    aspect_ratio = args.aspect_ratio or metadata.get("aspect_ratio", "16:9")
+
+    try:
+        channel_config = prompt_builder.load_channel_config(channel_name)
+    except FileNotFoundError as e:
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
+    process_story(args.story, channel_config, shot_duration, aspect_ratio, args.start_shot, args.end_shot)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,19 @@
+name: "Lone Ranger Dog"
+description: "A channel about a single dog going on adventures."
+
+rules: |
+  Stories are dialogue-free and safe for children.
+  - The dog looks photorealistic but does human activities.
+
+characters:
+  - id: "pop"
+    name: "Pop"
+    generic_role: "the adult dog"
+    story_description: "calm, gentle adult golden retriever"
+    visual_description: "a photorealistic calm adult golden retriever"
+    ref_image: "assets/ref/pop.png"
+
+video_settings:
+  world_style: "The dog has real fur. Objects are 3D CG cartoon."
+  style_suffix: " 4K, shallow depth of field, adorable."
+  frame_offset_seconds: 1.0

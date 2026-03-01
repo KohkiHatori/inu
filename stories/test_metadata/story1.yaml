@@ -1,0 +1,62 @@
+metadata:
+  channel: lone-ranger
+  format: square (1:1)
+  aspect_ratio: '1:1'
+  shot_duration: 4
+  num_shots: 3
+title: The Golden Painter
+concept: An adult golden retriever spends a peaceful afternoon in a vibrant meadow,
+  setting up an easel and painting a beautiful landscape on a canvas.
+new_reference_images:
+- id: wooden_easel
+  description: A sturdy wooden artist's tripod easel holding a blank white canvas,
+    isolated entirely on a plain white background.
+- id: paint_palette
+  description: A classic wooden artist's palette with dollops of bright red, blue,
+    yellow, and green wet paint, and a small wooden paintbrush resting on top, isolated
+    entirely on a plain white background.
+shots:
+- id: 1
+  mode: t2v
+  reference_images:
+  - pop
+  - wooden_easel
+  - paint_palette
+  description: 'A photorealistic adult dog (one dog total) stands upright on his hind
+    paws in a sunny, lush green meadow dotted with bright yellow wildflowers. The
+    adult dog is holding the classic wooden artist''s palette with wet paint in his
+    left paw. Beside the dog stands the sturdy wooden artist''s easel holding a blank
+    white canvas. The environment is bathed in bright, warm afternoon sunlight with
+    a clear blue sky. The adult dog slowly and calmly dips the small paintbrush into
+    a dollop of blue paint on the palette. The camera is steady, capturing the gentle,
+    grounded movements of the dog preparing to paint.
+
+    '
+- id: 2
+  mode: i2v
+  description: 'Continuing from the previous frame where the photorealistic adult
+    dog was holding the wooden paint palette next to the wooden artist''s easel in
+    the sunny green meadow — the adult dog (one dog total) slowly lifts the paintbrush
+    toward the canvas. With a gentle, deliberate motion, the adult dog applies a long,
+    smooth stroke of blue paint onto the canvas resting on the wooden easel. The lush
+    green meadow grasses and yellow wildflowers gently sway in a soft, continuous
+    breeze under the bright sunlight. The camera slowly pushes in closer to the canvas
+    as the adult dog calmly continues to paint.
+
+    '
+- id: 3
+  mode: t2v
+  reference_images:
+  - pop
+  - wooden_easel
+  description: 'A new over-the-shoulder angle set in the same sunny, lush green meadow.
+    The photorealistic adult dog (one dog total) now sits calmly on all fours in the
+    soft grass with his back to the camera, admiring his finished work. Directly in
+    front of the adult dog stands the sturdy wooden artist''s easel. The canvas on
+    the easel now displays a charming, colorful painted version of the meadow and
+    sky. The actual meadow stretches out in the background, bathed in warm, golden
+    late-afternoon sunlight. The adult dog''s tail slowly swishes back and forth on
+    the grass in a gentle, contented motion. The camera remains completely still,
+    framing the dog and his masterpiece.
+
+    '

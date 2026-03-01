@@ -12,6 +12,8 @@ from google import genai
 from google.genai import types
 from PIL import Image
 
+import prompt_builder
+
 load_dotenv()
 
 USE_VERTEX = os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "false").lower() == "true"
@@ -81,7 +83,7 @@ def generate_thumbnail(
         print(f"  Error generating thumbnail: {e}")
 
 
-def process_story_file(story_path: Path, client: genai.Client) -> None:
+def process_story_file(story_path: Path, client: genai.Client, channel_config: dict) -> None:
     if not story_path.exists():
         print(f"Error: Story file not found: {story_path}")
         return
@@ -126,14 +128,7 @@ def process_story_file(story_path: Path, client: genai.Client) -> None:
                 ref_images.append(item)
 
     # Construct prompt
-    prompt = (
-        f"A YouTube video thumbnail for a story about: {concept}\n\n"
-        "Characters: Pop (adult golden retriever), Pup-A (small fluffy puppy), Pup-B (puppy with white chest patch). "
-        "All objects/environment are stylized colorful 3D CG cartoon items. "
-        "Style: High quality, vibrant colors, catchy, photorealistic dogs, 4k, cinematic lighting, engaging composition. "
-        "Make it look like a professional YouTube thumbnail with high contrast and emotional appeal. "
-        "No text, no words, no logos."
-    )
+    prompt = prompt_builder.build_thumbnail_prompt(channel_config, concept)
 
     generate_thumbnail(client, prompt, ref_images, output_path)
 
@@ -141,7 +136,14 @@ def process_story_file(story_path: Path, client: genai.Client) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate YouTube thumbnails for stories.")
     parser.add_argument("path", help="Path to a story YAML file or a directory of stories.")
+    parser.add_argument("--channel", default="pup-pop-pup", help="Channel configuration to use.")
     args = parser.parse_args()
+
+    try:
+        channel_config = prompt_builder.load_channel_config(args.channel)
+    except FileNotFoundError as e:
+        print(e, file=sys.stderr)
+        sys.exit(1)
 
     try:
         client = genai.Client()
@@ -157,7 +159,7 @@ def main() -> None:
 
     if path.is_file():
         if path.suffix.lower() in ['.yaml', '.yml']:
-            process_story_file(path, client)
+            process_story_file(path, client, channel_config)
         else:
             print("Error: Input file must be a YAML file.")
     elif path.is_dir():
@@ -169,7 +171,7 @@ def main() -> None:
 
         print(f"Found {len(yaml_files)} story files.")
         for yaml_file in yaml_files:
-            process_story_file(yaml_file, client)
+            process_story_file(yaml_file, client, channel_config)
 
 if __name__ == "__main__":
     main()

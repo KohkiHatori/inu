@@ -5,16 +5,6 @@
 - For landscape, normal YouTube videos, 4 stories × 15 shots each x 8-second shots = 60 total shots, 8 minutes in total. 
 - For portrait, Youtube shorts, Instagram Reels, Tiktok videos, 1 story x 15 shots x 4-second shots = 15 total shots, 60 seconds in total 
 - **Audio:** AI-generated sound effects (diegetic) + Looping background music track.
-**Channel Description:** 
-Welcome to Pup-Pop-Pup! 🐾
-Join the heartwarming adventures of Pop (the patient dad) and his two energetic Pups as they explore the world, one paw print at a time!
-We deliver realistic animal stories designed to be safe, relaxing, and entertaining for kids and dog lovers of all ages. From backyard discoveries to gentle life lessons, our videos capture the pure joy of growing up—without any dialogue, just the sounds of nature and happy tails.
-What you'll find here:
-🐶 Funny & Cute Moments: Puppies being clumsy, playful, and curious.
-🌳 Nature Adventures: Beautiful, high-quality 4K scenes of the outdoors.
-❤️ Family Bonds: The special connection between a father dog and his little ones.
-New videos every week! Subscribe to join our furry family. 🔔
-Safe viewing for children. No scary content, just good vibes.
 
 ## 2. System Architecture
 
@@ -163,4 +153,3 @@ Combine multiple story videos into one long-form video (e.g., 8 mins), inserting
    python aggregate.py output/1/story1.mp4 output/1/story2.mp4 --output output/1/final_video.mp4
    ```
    *Output:* `output/1/final_video.mp4`
-

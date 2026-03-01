@@ -1,0 +1,1 @@
+Characters: {% for char in channel.characters %}{{ char.name }}, {{ char.visual_description }}{% if not loop.last %}; {% endif %}{% endfor %}. {{ channel.video_settings.world_style }} {{ description }} {{ channel.video_settings.style_suffix }}

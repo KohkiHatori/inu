@@ -1,0 +1,55 @@
+title: The Dog Painter
+concept: A calm golden retriever sets up an easel in a beautiful meadow and spends
+  a peaceful afternoon painting a landscape.
+new_reference_images:
+- id: flower_meadow
+  description: A wide view of a bright, sunlit meadow filled with vibrant colorful
+    wildflowers and tall green grass under a clear blue sky.
+- id: wooden_easel
+  description: A classic wooden artist's easel holding a white canvas, isolated entirely
+    on a plain white background.
+shots:
+- id: 1
+  mode: t2v
+  reference_images:
+  - pop
+  - flower_meadow
+  - wooden_easel
+  description: 'A wide shot in a bright, sunlit meadow filled with vibrant colorful
+    wildflowers and tall green grass under a clear blue sky. A calm, adult golden
+    retriever (one dog total) stands upright on its hind legs like a human, facing
+    a wooden artist''s easel holding a blank white canvas. The dog is perfectly photorealistic
+    with soft, thick golden fur gently catching the sunlight. The adult dog slowly
+    reaches its front paws forward to gently adjust the sides of the canvas, ensuring
+    it is perfectly straight. The camera is steady, capturing the peaceful outdoor
+    environment and the gentle rustling of the flowers in the soft breeze.
+
+    '
+- id: 2
+  mode: i2v
+  description: 'Continuing from the previous frame where the adult dog was adjusting
+    the blank canvas on the wooden easel — the adult dog (one dog total) now gently
+    raises its right front paw holding a small brush, and begins making slow, deliberate
+    strokes against the canvas. The setting remains the bright, sunlit meadow filled
+    with vibrant colorful wildflowers and tall green grass under a clear blue sky.
+    The camera slowly pushes in closer to the canvas, focusing on the calm, grounded
+    painting motion as the dog thoughtfully continues its work.
+
+    '
+- id: 3
+  mode: t2v
+  reference_images:
+  - pop
+  - flower_meadow
+  - wooden_easel
+  description: 'A medium over-the-shoulder shot looking past the calm, adult golden
+    retriever (one dog total) towards the wooden artist''s easel. The dog is now sitting
+    calmly on the ground, observing its finished work. The photorealistic golden retriever
+    has its back partially to the camera, with a softly glowing golden coat. On the
+    wooden easel, the canvas now displays a charming, colorful painting that beautifully
+    mimics the surrounding bright, sunlit meadow filled with vibrant colorful wildflowers.
+    The environment remains a sunny meadow under a clear blue sky. The adult dog slowly
+    tilts its head in satisfaction, its tail wagging gently in the tall grass. The
+    camera remains perfectly still, holding on this serene, picturesque moment.
+
+    '
