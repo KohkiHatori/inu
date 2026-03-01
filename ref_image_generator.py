@@ -52,14 +52,8 @@ def generate_reference_image(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate new dynamic reference images for a story.")
     parser.add_argument("--story", required=True, help="Path to the story YAML file.")
-    parser.add_argument("--channel", default="pup-pop-pup", help="Channel configuration to use.")
+    parser.add_argument("--channel", default=None, help="Override channel configuration.")
     args = parser.parse_args()
-
-    try:
-        channel_config = prompt_builder.load_channel_config(args.channel)
-    except FileNotFoundError as e:
-        print(e, file=sys.stderr)
-        sys.exit(1)
 
     story_path = Path(args.story)
     if not story_path.exists():
@@ -68,6 +62,17 @@ def main() -> None:
 
     with open(story_path, "r") as f:
         story = yaml.safe_load(f)
+
+    metadata = story.get("metadata", {})
+    channel_name = args.channel or metadata.get("channel", "pup-pop-pup")
+
+    try:
+        channel_config = prompt_builder.load_channel_config(channel_name)
+    except FileNotFoundError as e:
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
+
 
     new_refs = story.get("new_reference_images", [])
     if not new_refs:

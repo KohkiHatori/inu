@@ -9,6 +9,7 @@ import os
 import re
 import sys
 from pathlib import Path
+import subprocess
 
 import yaml
 from dotenv import load_dotenv
@@ -178,6 +179,16 @@ def main() -> None:
         yaml.dump(final_output, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
 
     print(f"Saved to {out_path}")
+
+    # Automatically trigger reference image generation
+    print("\n--- Automatically generating reference images ---")
+    try:
+        subprocess.run(
+            [sys.executable, "ref_image_generator.py", "--story", str(out_path)],
+            check=True
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Error during reference image generation: {e}", file=sys.stderr)
 
 
 if __name__ == "__main__":
