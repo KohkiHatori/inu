@@ -26,9 +26,9 @@ ASPECT_RATIO = "16:9"
 DURATION = 8
 
 REF_IMAGE_PATHS: list[str] = [
-    "assets/ref/pop.png",
-    "assets/ref/pupa.png",
-    "assets/ref/pupb.png",
+    "assets/ref/pup-pop-pup/pop.png",
+    "assets/ref/pup-pop-pup/pupa.png",
+    "assets/ref/pup-pop-pup/pupb.png",
 ]
 
 HERO_PREFIX = (

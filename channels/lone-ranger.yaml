@@ -11,7 +11,7 @@ characters:
     generic_role: "the adult dog"
     story_description: "calm, gentle adult golden retriever"
     visual_description: "a photorealistic calm adult golden retriever"
-    ref_image: "assets/ref/pop.png"
+    ref_image: "assets/ref/lone-ranger/pop.png"
 
 video_settings:
   world_style: "The dog has real fur. Objects are 3D CG cartoon."

@@ -19,12 +19,6 @@ load_dotenv()
 USE_VERTEX = os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "false").lower() == "true"
 MODEL = "gemini-3-pro-image-preview"
 
-# Default character references
-CHAR_REF_PATHS = [
-    Path("assets/ref/pop.png"),
-    Path("assets/ref/pupa.png"),
-    Path("assets/ref/pupb.png"),
-]
 
 def generate_thumbnail(
     client: genai.Client,
@@ -83,7 +77,7 @@ def generate_thumbnail(
         print(f"  Error generating thumbnail: {e}")
 
 
-def process_story_file(story_path: Path, client: genai.Client, channel_config: dict) -> None:
+def process_story_file(story_path: Path, client: genai.Client, channel_override: str | None = None) -> None:
     if not story_path.exists():
         print(f"Error: Story file not found: {story_path}")
         return
@@ -98,6 +92,15 @@ def process_story_file(story_path: Path, client: genai.Client, channel_config: d
     concept = data.get("concept")
     if not concept:
         print(f"Skipping {story_path.name}: No 'concept' field found.")
+        return
+
+    # Load channel from story metadata (or CLI override)
+    metadata = data.get("metadata", {})
+    channel_name = channel_override or metadata.get("channel", "pup-pop-pup")
+    try:
+        channel_config = prompt_builder.load_channel_config(channel_name)
+    except FileNotFoundError as e:
+        print(f"Error loading channel '{channel_name}': {e}")
         return
 
     # Extract video_id and story_name
@@ -117,7 +120,10 @@ def process_story_file(story_path: Path, client: genai.Client, channel_config: d
 
     # Gather reference images
     # 1. Base character refs
-    ref_images = list(CHAR_REF_PATHS)
+    ref_images = []
+    for char in channel_config.get("characters", []):
+        if "ref_image" in char:
+            ref_images.append(Path(char["ref_image"]))
 
     # 2. Story specific refs: assets/ref/{video_id}/{story_name}/*
     # Note: Using video_id/story_name matches the structure you implied
@@ -136,14 +142,8 @@ def process_story_file(story_path: Path, client: genai.Client, channel_config: d
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate YouTube thumbnails for stories.")
     parser.add_argument("path", help="Path to a story YAML file or a directory of stories.")
-    parser.add_argument("--channel", default="pup-pop-pup", help="Channel configuration to use.")
+    parser.add_argument("--channel", default=None, help="Override channel configuration.")
     args = parser.parse_args()
-
-    try:
-        channel_config = prompt_builder.load_channel_config(args.channel)
-    except FileNotFoundError as e:
-        print(e, file=sys.stderr)
-        sys.exit(1)
 
     try:
         client = genai.Client()
@@ -159,7 +159,7 @@ def main() -> None:
 
     if path.is_file():
         if path.suffix.lower() in ['.yaml', '.yml']:
-            process_story_file(path, client, channel_config)
+            process_story_file(path, client, args.channel)
         else:
             print("Error: Input file must be a YAML file.")
     elif path.is_dir():
@@ -171,7 +171,7 @@ def main() -> None:
 
         print(f"Found {len(yaml_files)} story files.")
         for yaml_file in yaml_files:
-            process_story_file(yaml_file, client, channel_config)
+            process_story_file(yaml_file, client, args.channel)
 
 if __name__ == "__main__":
     main()
