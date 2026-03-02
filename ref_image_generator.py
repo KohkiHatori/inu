@@ -19,7 +19,8 @@ MODEL = "gemini-3-pro-image-preview"
 def generate_reference_image(
     client: genai.Client,
     prompt: str,
-    output_path: Path
+    output_path: Path,
+    aspect_ratio: str = "1:1",
 ) -> None:
     """Generates an image using Gemini and saves it to output_path."""
     print(f"Generating image for prompt: '{prompt}'")
@@ -31,7 +32,7 @@ def generate_reference_image(
         config=types.GenerateContentConfig(
             response_modalities=['IMAGE'],
             image_config=types.ImageConfig(
-                aspect_ratio="1:1"
+                aspect_ratio=aspect_ratio
             )
         )
     )
@@ -60,6 +61,7 @@ def run_story_mode(story_path: Path, channel_override: str | None) -> None:
 
     metadata = story.get("metadata", {})
     channel_name = channel_override or metadata.get("channel", "pup-pop-pup")
+    video_aspect_ratio = metadata.get("aspect_ratio", "16:9")
 
     try:
         channel_config = prompt_builder.load_channel_config(channel_name)
@@ -83,6 +85,7 @@ def run_story_mode(story_path: Path, channel_override: str | None) -> None:
     print(f"Found {len(new_refs)} new reference images to generate for '{video_id}/{story_name}'.")
     for ref in new_refs:
         ref_id = ref["id"]
+        ref_type = ref.get("type", "prop")
         description = ref["description"]
         out_path = out_dir / f"{ref_id}.png"
 
@@ -90,10 +93,12 @@ def run_story_mode(story_path: Path, channel_override: str | None) -> None:
             print(f"Skipping '{ref_id}' - image already exists at {out_path}")
             continue
 
-        full_prompt = prompt_builder.build_ref_image_prompt(channel_config, description)
+        full_prompt = prompt_builder.build_ref_image_prompt(channel_config, description, ref_type)
+        # Props are always square; scenery matches the video aspect ratio for better composition framing
+        img_aspect_ratio = video_aspect_ratio if ref_type == "scenery" else "1:1"
 
         try:
-            generate_reference_image(client, full_prompt, out_path)
+            generate_reference_image(client, full_prompt, out_path, img_aspect_ratio)
         except Exception as e:
             print(f"Error generating '{ref_id}': {e}", file=sys.stderr)
 
@@ -113,7 +118,7 @@ def run_channel_mode(channel_name: str) -> None:
         print(f"No characters found in channel '{channel_name}'. Nothing to do.")
         return
 
-    out_dir = Path("assets") / "ref" / channel_name
+    out_dir = Path("assets") / "ref" / "channels" / channel_name
     out_dir.mkdir(parents=True, exist_ok=True)
 
     client = genai.Client()

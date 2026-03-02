@@ -1,6 +1,12 @@
 Generate an image of the following item or scenery:
 {{ object_description }}
 
+{% if ref_type == "prop" %}
+Framing requirements: The entire subject must be FULLY VISIBLE and centered in the frame. There must be generous white space (padding) on all four sides — the subject should never touch or be cut off by any edge. Show the complete object from top to bottom with plenty of clear space surrounding it.
+
 The image must match the visual style and atmosphere of the "{{ channel.name }}" universe.
 World styling details: {{ channel.video_settings.world_style }}
+{% else %}
+Important: This is a BACKGROUND SCENERY image. Do NOT include any animals, characters, or living creatures of any kind. The scene must be completely empty of animals. Focus purely on the environment, landscape, and setting.
+{% endif %}
 Style Suffix: {{ channel.video_settings.style_suffix }}

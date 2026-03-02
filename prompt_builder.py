@@ -45,10 +45,10 @@ def build_story_user_prompt(channel: dict, aspect_ratio: str, shot_dur: int, tot
         num_shots=num_shots
     )
 
-def build_ref_image_prompt(channel: dict, object_description: str) -> str:
+def build_ref_image_prompt(channel: dict, object_description: str, ref_type: str = "prop") -> str:
     """Renders the prompt for generating a dynamic reference image."""
     template = env.get_template("ref_image_prompt.jinja")
-    return template.render(channel=channel, object_description=object_description)
+    return template.render(channel=channel, object_description=object_description, ref_type=ref_type)
 
 def build_thumbnail_prompt(channel: dict, concept: str) -> str:
     """Renders the prompt for generating a YouTube thumbnail."""

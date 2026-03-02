@@ -1,0 +1,125 @@
+metadata:
+  channel: joey-the-joey
+  aspect_ratio: '9:16'
+  shot_duration: 8
+  num_shots: 8
+title: Joey Discovers a Baseball
+concept: Joey, the tiny baby kangaroo, is resting on the sunny veranda when he spots
+  a curious white object with red stitches. He tentatively investigates the oversized
+  baseball, inadvertently pushing it onto the grass, where he engages in a gentle
+  game of chase before deciding it makes the perfect chin rest for an afternoon nap.
+new_reference_images:
+- id: baseball
+  type: prop
+  description: an isolated, slightly worn white leather baseball with bright red stitching,
+    casting a soft shadow on a plain white background.
+- id: veranda_steps
+  type: scenery
+  description: rustic, sun-bleached wooden veranda steps leading down to a patch of
+    red outback earth, bathed in warm, golden late-afternoon sunlight.
+- id: backyard_grass
+  type: scenery
+  description: a ground-level view of lush, slightly overgrown green lawn dotted with
+    fallen dried eucalyptus leaves, illuminated by dappled sunlight filtering through
+    trees above.
+shots:
+- id: 1
+  mode: t2v
+  reference_images:
+  - joey
+  - veranda_steps
+  - baseball
+  description: 'A photorealistic baby kangaroo with velvet-soft caramel fur and oversized
+    rounded ears is tucked safely inside a cosy canvas sling resting on rustic, sun-bleached
+    wooden veranda steps. Warm, golden late-afternoon sunlight bathes the scene. A
+    few inches away on the wooden board sits an oversized worn white baseball with
+    bright red stitching. The baby kangaroo slowly lifts his head, his wide-eyed,
+    perpetually curious expression locked onto the strange white sphere (one kangaroo,
+    one baseball). The camera remains smooth and steady, capturing the gentle sway
+    of shadows.
+
+    '
+- id: 2
+  mode: i2v
+  description: 'Continuing from the previous frame where the baby kangaroo was looking
+    out of the canvas sling at the baseball — the baby kangaroo gently leans forward,
+    his tiny paws gripping the edge of the sling as he pulls himself entirely out
+    onto the sun-bleached wooden veranda steps. The warm sunlight continues to illuminate
+    the oversized white baseball sitting still on the wood (one kangaroo, one baseball).
+    The baby kangaroo leans his nose closer to the baseball, sniffing it cautiously.
+
+    '
+- id: 3
+  mode: i2v
+  description: 'Continuing from the previous frame where the baby kangaroo was sniffing
+    the baseball on the wooden steps — the baby kangaroo gives the baseball a tiny,
+    curious nudge with his dark wet nose. The worn white baseball slowly rolls forward
+    under the gentle pressure, tumbling smoothly off the edge of the wooden step and
+    dropping out of frame toward the ground below. The baby kangaroo perks his oversized
+    ears forward in surprise, watching it fall (one kangaroo). The golden sunlight
+    and rustic wooden setting remain consistent.
+
+    '
+- id: 4
+  mode: t2v
+  reference_images:
+  - joey
+  - baseball
+  - backyard_grass
+  description: 'A ground-level view on a lush, slightly overgrown green lawn dotted
+    with fallen dried eucalyptus leaves, bathed in dappled sunlight. A photorealistic
+    baby kangaroo with velvet-soft caramel fur gently hops into the frame, landing
+    softly on the grass. A few feet in front of him rests the worn white baseball
+    with red stitching, which is oversized compared to his tiny paws. The baby kangaroo
+    tilts his head with wide-eyed enthusiasm, staring at the baseball on the lawn
+    (one kangaroo, one baseball). The camera slowly pans right, tracking his gentle
+    movement.
+
+    '
+- id: 5
+  mode: i2v
+  description: 'Continuing from the previous frame where the baby kangaroo hopped
+    onto the grass near the ball — the baby kangaroo slowly extends one tiny paw and
+    softly taps the top of the worn white baseball. The baseball rolls a few inches
+    away through the green grass and dry eucalyptus leaves. The baby kangaroo immediately
+    follows it with a small, grounded hop, looking deeply fascinated by the movement
+    (one kangaroo, one baseball). The dappled sunlight shifts slightly over the lush
+    lawn.
+
+    '
+- id: 6
+  mode: i2v
+  description: 'Continuing from the previous frame where the baby kangaroo tapped
+    the ball and hopped after it — the baby kangaroo leans down and tries to wrap
+    both of his small paws around the oversized worn white baseball. The sphere is
+    too large for him to hold, so he ends up playfully leaning his weight against
+    it, causing his hind legs to shift slightly to maintain balance in the soft green
+    grass (one kangaroo, one baseball). The warm dappled lighting highlights the red
+    stitching on the ball.
+
+    '
+- id: 7
+  mode: t2v
+  reference_images:
+  - joey
+  - baseball
+  - backyard_grass
+  description: 'A tight, intimate close-up on the lush green lawn with scattered eucalyptus
+    leaves, softly lit by dappled afternoon sun. A photorealistic baby kangaroo with
+    velvet-soft caramel fur is lying comfortably on his belly in the grass. Right
+    beside him is the worn white baseball with red stitching. The baby kangaroo is
+    calm, his oversized ears relaxing and dropping slightly as he gazes peacefully
+    at the textured leather surface of the baseball (one kangaroo, one baseball).
+    Gentle, grounded stability as the camera slowly pushes in.
+
+    '
+- id: 8
+  mode: i2v
+  description: 'Continuing from the previous frame where the baby kangaroo was lying
+    on the grass next to the ball — the baby kangaroo slowly lowers his head and gently
+    rests his chin directly on top of the worn white baseball. With his head supported
+    by the oversized sphere, his large, dark eyes begin to slowly blink, growing heavy
+    with sleep. He exhales softly, settling into the lush grass and eucalyptus leaves
+    for a peaceful nap under the dappled sunlight (one kangaroo, one baseball).
+
+    '

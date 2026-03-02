@@ -1,3 +1,10 @@
 output/
 venv/
 .env
+.DS_Store
+
+# Generated story reference images (regenerated on demand — not committed)
+# Ignore all of assets/ref/ except the channel refs subdirectory
+assets/ref/*
+!assets/ref/channels/
+!assets/ref/channels/**

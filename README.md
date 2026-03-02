@@ -43,26 +43,8 @@ shots:
   # ... up to id: 15
 ```
 
-## 3. Module Specifications
 
-### **Module 1: Story Generator (`story_generator.py`)**
-**Library:** `google-genai`
-**Model:** Gemini 3.1 Pro (text generation)
-
-**Responsibilities:** Accept an optional user-supplied idea and a target format, then produce a fully-populated `story*.yaml` file with 15 shot descriptions aligned with the channel concept.
-
-### **Module 2: Video Generator (`video_generator.py`)**
-**Library:** `google-genai`
-**Model:** Veo 3.1 (`veo-3.1-generate-fast-preview`)
-
-
-### **Module 3: Assembler (`assembler.py`)**
-**Library:** `moviepy`
-
-
-***
-
-## 4. Getting Started
+## 3. Getting Started
 
 ### **Prerequisites**
 - Python 3.10+

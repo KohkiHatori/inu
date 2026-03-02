@@ -1,0 +1,134 @@
+metadata:
+  channel: joey-the-joey
+  aspect_ratio: '9:16'
+  shot_duration: 8
+  num_shots: 8
+title: Joey's Outback Masterpiece
+concept: 'When Joey wakes up in his cozy canvas sling on the veranda, he discovers
+  a set of oversized paints and a blank canvas left out in the sun. Curious, he begins
+  to inspect the colorful blobs of paint, accidentally turning his everyday exploration
+  into a messy, heartwarming paw-print painting session. The story captures his wonder
+  as he creates art using his tiny paws and big clumsy feet against the backdrop of
+  the serene Australian outback.
+
+  '
+new_reference_images:
+- id: canvas_pouch
+  description: A cozy, heavy-duty cream canvas sling pouch filled with a fluffy woolen
+    blanket, isolated on a plain white background.
+- id: paint_palette
+  description: An oversized, rustic wooden artist's palette holding thick, wet, glossy
+    dollops of primary red, yellow, and blue paint, isolated on a plain white background.
+- id: easel_canvas
+  description: A small, sturdy wooden artist's easel holding a completely blank, crisp
+    white square canvas, isolated on a plain white background.
+shots:
+- id: 1
+  mode: t2v
+  reference_images:
+  - joey
+  - canvas_pouch
+  description: 'A cozy, sunlit Australian outback veranda with weathered wooden floorboards
+    and a view of red earth and tall eucalyptus trees under a bright blue sky. Hanging
+    securely from a wooden veranda post is a heavy-duty cream canvas sling pouch.
+    One photorealistic baby kangaroo with velvet-soft caramel fur and oversized rounded
+    ears slowly peeks its head out of the top of the pouch. The baby kangaroo blinks
+    sleepily with wide, curious eyes, illuminated by the soft, warm morning light.
+    Gentle, grounded camera movement slowly zooming in.
+
+    '
+- id: 2
+  mode: i2v
+  description: 'Continuing from the previous frame where the one baby kangaroo was
+    peeking out of the hanging canvas sling pouch on the sunlit wooden veranda — the
+    baby kangaroo now gently wiggles its shoulders and slowly hops down onto the warm
+    wooden floorboards. The canvas pouch sways slightly from the movement. The rustic
+    veranda remains bathed in golden morning sunlight that casts long, soft shadows
+    across the wooden planks, with the red outback earth and peaceful eucalyptus trees
+    visible in the tranquil background.
+
+    '
+- id: 3
+  mode: t2v
+  reference_images:
+  - joey
+  - easel_canvas
+  - paint_palette
+  description: 'A low-angle perspective on the sunlit wooden veranda, framing the
+    bright outback landscape of red dirt and green eucalyptus trees in the background.
+    One photorealistic baby kangaroo sits calmly on the weathered floorboards. Right
+    in front of the baby kangaroo is a small wooden artist''s easel holding a sturdy,
+    blank white canvas. On the floor nearby rests an oversized, rustic wooden artist''s
+    palette holding thick, glossy dollops of red, yellow, and blue paint. The baby
+    kangaroo leans forward slightly, sniffing the colorful paint palette with wide,
+    curious eyes. Slow, steady panning shot.
+
+    '
+- id: 4
+  mode: i2v
+  description: 'Continuing from the previous frame where the one baby kangaroo was
+    sniffing the wooden paint palette in front of the blank canvas on the sunlit veranda
+    — the baby kangaroo cautiously lowers its tiny front paw and gently taps the thick
+    red paint on the palette, coating its paw in bright pigment. The sturdy white
+    canvas remains blank on the wooden easel. The environment features bright, warm
+    sunlight reflecting off the rustic wooden floorboards, perfectly highlighting
+    the rich red earth and eucalyptus trees in the serene outback background.
+
+    '
+- id: 5
+  mode: i2v
+  description: 'Continuing from the previous frame where the one baby kangaroo got
+    red paint on its paw next to the easel and palette on the rustic veranda — the
+    baby kangaroo lifts its red-coated front paw and gently presses it against the
+    lower half of the blank white canvas on the wooden easel. It leaves a perfect,
+    colorful little paw print on the fabric. The baby kangaroo stares at the bright
+    mark with wide-eyed wonder. The bright, warm sunlight continues to illuminate
+    the weathered wooden floorboards and the distant outback landscape of red dirt
+    and green trees.
+
+    '
+- id: 6
+  mode: t2v
+  reference_images:
+  - joey
+  - easel_canvas
+  - paint_palette
+  description: 'A slightly closer, vertical angle on the rustic, sunlit veranda. The
+    small wooden artist''s easel now holds a canvas that has a few colorful, messy
+    red and blue paw prints scattered across it. The oversized wooden paint palette
+    sits on the floorboards directly below it. One photorealistic baby kangaroo stands
+    beside the palette, its soft caramel fur contrasting with the vibrant paints.
+    The baby kangaroo''s front paws have small smudges of bright paint on them. The
+    lighting is bright and cheerful, with the outback eucalyptus trees softly blurred
+    in the background. The baby kangaroo slowly reaches down to touch the yellow paint.
+
+    '
+- id: 7
+  mode: i2v
+  description: 'Continuing from the previous frame where the one baby kangaroo was
+    crouching beside the paint palette on the sunlit veranda — the baby kangaroo shifts
+    its weight and accidentally sits down directly onto the oversized wooden palette,
+    coating its small bottom and hind feet in bright yellow paint. The baby kangaroo
+    freezes completely still, sitting on the palette and staring straight down at the
+    yellow paint with wide, baffled eyes (one baby kangaroo total). The wooden easel
+    and canvas remain undisturbed beside it. The camera stays locked-off and steady.
+    The rustic floorboards and the distant red outback earth and eucalyptus trees glow
+    softly in the warm sunlight.
+
+    '
+- id: 8
+  mode: t2v
+  reference_images:
+  - joey
+  - easel_canvas
+  description: 'A wide, frontal angle of the sunny Australian veranda with beautiful
+    red earth and towering eucalyptus trees fully visible in the background under
+    a vibrant blue sky. The small wooden artist''s easel holds the finished canvas,
+    which is now a colorful, heartwarming abstract masterpiece of tiny red and blue
+    paw prints surrounding one large yellow footprint. One photorealistic baby kangaroo
+    sits proudly right next to the easel on the wooden floorboards, looking directly
+    at the camera with a happy, wide-eyed expression. The kangaroo has tiny, endearing
+    specks of paint on its soft caramel fur. Steady, locked-off camera capturing the
+    peaceful afternoon light.
+
+    '

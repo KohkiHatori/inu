@@ -6,7 +6,10 @@ Output ONLY a YAML block (fenced with ```yaml ... ```) with these fields:
 - concept: one-paragraph summary of the story
 - new_reference_images: a list of up to {{ dynamic_slots }} items to generate. Each item must have:
     - id: a short string identifier (e.g., "blue_bicycle")
-    - description: a detailed visual description of the item for an image generator (e.g., "a shiny blue vintage bicycle with a woven front basket"). IF this is a prop or guest character, you MUST isolate it entirely on a plain white background. IF this is a background scenery/environment reference, you must describe the full landscape (e.g., "a wide view of a pristine mountain lake at sunset").
+    - type: either "prop" or "scenery".
+        - "prop": an isolated object or guest character on a plain white background.
+        - "scenery": a full background environment image (e.g. a landscape or room interior).
+    - description: a detailed visual description of the item for an image generator (e.g., "a shiny blue vintage bicycle with a woven front basket"). IF type is "prop", you MUST isolate it entirely on a plain white background. IF type is "scenery", describe the full landscape or environment (e.g., "a wide view of a pristine mountain lake at sunset").
 - shots: a list of exactly {{ num_shots }} items, each with:
     - id: integer 1-{{ num_shots }}
       - mode: either "t2v" or "i2v".
@@ -37,16 +40,25 @@ Output ONLY a YAML block (fenced with ```yaml ... ```) with these fields:
     e.g., "The two puppies are playing while the adult dog watches (three dogs total)."
     Reinforce the identity relationship: "The adult dog remains still while the smaller puppy moves."
 
-    - MOTION & STABILITY: Describe gentle, grounded movements. Avoid chaotic action, fast pacing, or complex physics.
-    Use phrases like "slowly lifts head", "gently wagging tail", "sitting calmly".
+    - MOTION & STABILITY (shot description writing technique, NOT a plot constraint): When writing each individual shot description, describe movements that are gentle, grounded, and physically achievable by a video generation model. Avoid chaotic camera work or impossible physics in the descriptions.
+    Use grounded language like "slowly lifts head", "gently nudges", "carefully places".
     Keep the camera motion smooth and steady.
+    NOTE: this constraint applies to how you WRITE each shot description — it does NOT mean the overall plot should be calm or uneventful. The story MUST have dramatic tension, surprises, and emotional peaks (see STORY ARC below).
 
     - T2V shots (mode: t2v) — these are the first shot of each new scene. Fully describe the setting, lighting, environment, props, and the position and appearance of all characters. Write the description as if the video model is seeing these characters for the first time.
     - I2V shots (mode: i2v) — these continue a scene from the previous shot. Open with a brief continuity line referencing what each character was doing at the end of the previous shot (e.g. "Continuing from the previous frame where the adult dog was stirring batter at the counter and the two puppies were watching from the doorway — the adult dog now lifts the bowl..."). Do NOT re-describe the characters' physical appearance; the video model already has them from the starting frame.
     - Every description (both T2V and I2V) must fully re-state the setting, environment details, lighting, color palette, and any relevant props.
     - Do not include dialogue, text overlays, or narration.
 
-Be creative with plots. The characters should be doing relatable human activities in a realistic world. Props and objects should look realistic and detailed, matching the environment. The characters themselves must always be described as photorealistic. Make sure the {{ num_shots }} shots tell a coherent story arc with a beginning, middle, and satisfying end.
+STORY ARC (MANDATORY): The {{ num_shots }} shots MUST follow a clear three-act dramatic structure. A flat sequence of events where the character simply performs one action after another is NOT acceptable.
+
+- ACT 1 — SETUP (roughly shots 1–{{ (num_shots * 0.25) | int }}): Establish the character, the setting, and a clear GOAL. The character wants or needs to achieve something specific.
+- ACT 2 — COMPLICATION (roughly shots {{ (num_shots * 0.25 + 1) | int }}–{{ (num_shots * 0.75) | int }}): Something goes WRONG or doesn't work as expected. Introduce at least ONE setback, surprise, or unexpected obstacle. The character must react, adapt, or try a different approach. This is what makes the story interesting — do not skip it.
+- ACT 3 — RESOLUTION (roughly shots {{ (num_shots * 0.75 + 1) | int }}–{{ num_shots }}): The character succeeds (or finds an unexpected alternative). The ending should feel EARNED — the audience should feel the satisfaction of the journey.
+
+Emotional variety is required: the character should express at least 3 distinct emotions across the story (e.g. curiosity → frustration/surprise → joy/pride). Do NOT write every shot with the same "wide-eyed curious" expression.
+
+The characters should be doing relatable activities in a realistic world. Props and objects should look realistic and detailed. The characters themselves must always be described as photorealistic.
 
 OBJECT CONTINUITY RULE:
 - Within a scene (I2V shots): Any object/prop used in shot N must be visible in shot N-1. Introduce props early in the background before they are used.

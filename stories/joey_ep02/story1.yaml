@@ -1,0 +1,191 @@
+metadata:
+  channel: joey-the-joey
+  aspect_ratio: '16:9'
+  shot_duration: 8
+  num_shots: 15
+title: Joey's Thirsty Little Plant
+concept: Joey hops out onto a sunny outback veranda and discovers an oversized red
+  watering can. He drags it through the dusty garden, figuring out how to fill it
+  from a hose, all to save a drooping little potted seedling that needs a drink.
+new_reference_images:
+- id: red_watering_can
+  description: A bright red, vintage metal watering can with a large, perforated shower-head
+    spout and a curved top handle, isolated entirely on a plain white background.
+- id: potted_seedling
+  description: A small, slightly drooping green leafy seedling planted in dry soil
+    inside a rustic, weathered terracotta pot, isolated entirely on a plain white
+    background.
+- id: garden_hose
+  description: A coiled green garden hose with a heavy brass nozzle attached to the
+    end, isolated entirely on a plain white background.
+shots:
+- id: 1
+  mode: t2v
+  reference_images:
+  - joey
+  - red_watering_can
+  description: 'A wide shot on a rustic wooden veranda in the Australian outback,
+    bathed in warm morning sunlight. In the background, red earth and tall eucalyptus
+    trees meet a wide blue sky. There is one baby kangaroo sitting comfortably beside
+    a cozy canvas sling chair. Directly in front of the single baby kangaroo sits
+    a giant bright red watering can, which is oversized compared to the tiny animal.
+    The kangaroo looks at the red watering can with wide, curious eyes. The lighting
+    is soft and natural, creating gentle shadows on the wooden floorboards.
+
+    '
+- id: 2
+  mode: i2v
+  description: 'Continuing from the previous frame where the single baby kangaroo
+    was looking at the oversized watering can on the sunlit veranda — the baby kangaroo
+    slowly leans its upper body forward, stretching its neck to gently sniff the large
+    perforated spout of the red watering can. The warm outback sunlight continues
+    to illuminate the wooden floorboards and the eucalyptus trees in the background.
+    The kangaroo''s movements are slow, cautious, and completely grounded.
+
+    '
+- id: 3
+  mode: i2v
+  description: 'Continuing from the previous frame where the single baby kangaroo
+    was sniffing the spout — the baby kangaroo gently bumps the side of the bright
+    red watering can with its soft nose. The empty watering can tips ever so slightly
+    on the wooden veranda floor, making a soft wobbling motion. The baby kangaroo''s
+    ears twitch with curiosity. The outback garden setting remains sunny and peaceful.
+
+    '
+- id: 4
+  mode: t2v
+  reference_images:
+  - joey
+  - red_watering_can
+  description: 'A medium tracking shot along a dusty, red-earth garden path lined
+    with smooth river stones. The single baby kangaroo is slowly walking forward on
+    its hind legs, using its front paws to drag the bright red watering can by its
+    curved bottom handle. The oversized watering can slides along the dry red dirt.
+    The background features a rustic wooden fence and native Australian shrubs under
+    a bright, cloudless blue sky.
+
+    '
+- id: 5
+  mode: i2v
+  description: 'Continuing from the previous frame where the single baby kangaroo
+    was dragging the watering can down the dirt path — the baby kangaroo suddenly
+    stops moving and drops the handle of the watering can. The baby kangaroo turns
+    its head to look down at the ground beside the path, its large ears swiveling
+    forward in concern. The red earth, rustic fence, and bright blue sky remain steady
+    in the background.
+
+    '
+- id: 6
+  mode: t2v
+  reference_images:
+  - joey
+  - potted_seedling
+  description: 'A low-angle close-up shot on the dry red dirt path. The single baby
+    kangaroo is kneeling down next to a rustic terracotta pot. Inside the pot is a
+    small, drooping green leafy seedling surrounded by very dry, cracked potting soil.
+    The baby kangaroo leans its face close to the sad potted seedling, looking at
+    it with a soft, sympathetic expression. The bright sunlight casts crisp shadows
+    across the dusty ground and the textured terracotta pot.
+
+    '
+- id: 7
+  mode: i2v
+  description: 'Continuing from the previous frame where the single baby kangaroo
+    was looking at the potted seedling — the baby kangaroo slowly extends one tiny
+    front paw and gently pats the dry, cracked dirt inside the terracotta pot. After
+    touching the dirt, the baby kangaroo turns its head away from the pot, looking
+    back toward the garden path with a determined look in its eyes. The lighting remains
+    warm and sunny on the red earth.
+
+    '
+- id: 8
+  mode: t2v
+  reference_images:
+  - joey
+  - red_watering_can
+  - garden_hose
+  description: 'A medium shot near a weathered wooden garden tap post. The single
+    baby kangaroo is standing next to the bright red watering can, which is positioned
+    directly beneath the tap post. Resting on the ground beside the watering can is
+    a coiled green garden hose with a heavy brass nozzle. The outback setting features
+    bright sunlight, dusty red earth, and the shadows of eucalyptus leaves swaying
+    gently overhead. The baby kangaroo looks down at the brass nozzle.
+
+    '
+- id: 9
+  mode: i2v
+  description: 'Continuing from the previous frame where the single baby kangaroo
+    was standing by the hose and watering can — the baby kangaroo crouches down and
+    uses both front paws to slowly push the heavy brass nozzle of the green garden
+    hose. The kangaroo pushes the nozzle upward until it hooks over the top rim of
+    the bright red watering can. The baby kangaroo remains still, holding the nozzle
+    in place.
+
+    '
+- id: 10
+  mode: i2v
+  description: 'Continuing from the previous frame where the single baby kangaroo
+    was holding the hose nozzle over the watering can rim — a gentle, clear stream
+    of water begins to flow from the brass nozzle, splashing softly into the bottom
+    of the bright red watering can. The single baby kangaroo watches the water fall
+    with wide, fascinated eyes, keeping its paws securely on the hose. The warm sunlight
+    sparkles on the flowing water.
+
+    '
+- id: 11
+  mode: t2v
+  reference_images:
+  - joey
+  - red_watering_can
+  - potted_seedling
+  description: 'A medium shot back on the sunny red-earth garden path. The single
+    baby kangaroo is now carefully pushing the bright red watering can, which appears
+    much heavier now, toward the rustic terracotta pot containing the drooping green
+    seedling. The kangaroo uses its chest and front paws to slide the watering can
+    across the dirt. The outback environment is vibrant, with the blue sky and green
+    shrubs framing the dusty path.
+
+    '
+- id: 12
+  mode: i2v
+  description: 'Continuing from the previous frame where the single baby kangaroo
+    was pushing the heavy watering can — the baby kangaroo stops beside the terracotta
+    pot. It stands up tall on its hind legs and places both front paws on the back
+    handle of the bright red watering can. The baby kangaroo leans its weight forward,
+    slowly tipping the large watering can toward the drooping potted seedling. The
+    kangaroo''s movements are deliberate and careful.
+
+    '
+- id: 13
+  mode: i2v
+  description: 'Continuing from the previous frame where the single baby kangaroo
+    was tipping the watering can — a gentle shower of sparkling water pours out from
+    the perforated spout of the bright red watering can, raining down softly onto
+    the drooping green seedling and the dry dirt inside the terracotta pot. The single
+    baby kangaroo holds the tipped watering can steady, watching the water soak into
+    the soil.
+
+    '
+- id: 14
+  mode: t2v
+  reference_images:
+  - joey
+  - potted_seedling
+  description: 'A beautiful close-up shot of the single baby kangaroo sitting beside
+    the terracotta pot. The green seedling is now glistening with water drops and
+    stands noticeably taller and perkier in the dark, wet soil. The baby kangaroo
+    sits calmly, resting its front paws in its lap, looking at the revived potted
+    seedling with a soft, bright-eyed expression of joy. The outback sunlight glows
+    warmly on the kangaroo''s caramel fur and the vibrant green leaves of the plant.
+
+    '
+- id: 15
+  mode: i2v
+  description: 'Continuing from the previous frame where the single baby kangaroo
+    was sitting happily beside the perky seedling — the single baby kangaroo does
+    a very small, gentle, and joyful hop in place beside the terracotta pot. Its oversized
+    rounded ears perk up, and it looks entirely content. The glistening wet leaves
+    of the potted seedling sway slightly in a gentle breeze under the bright outback
+    sun.
+
+    '

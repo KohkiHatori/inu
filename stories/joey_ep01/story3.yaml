@@ -1,0 +1,120 @@
+metadata:
+  channel: joey-the-joey
+  aspect_ratio: '9:16'
+  shot_duration: 8
+  num_shots: 8
+title: Joey the Gardener
+concept: 'Joey spots a drooping sunflower in a sunroom and decides it needs a drink.
+  He finds a giant watering can, but it is far too heavy for him to tip with his small
+  paws, leading to a frustrating spill on the floor. Determined to help his leafy
+  friend, Joey figures out how to use his powerful hind legs and tail for leverage
+  to successfully water the plant, beaming with pride when the flower perks up.
+
+  '
+new_reference_images:
+- id: watering_can
+  type: prop
+  description: A large, rustic, heavily oversized galvanized steel watering can with
+    a long spout and a curved top handle, isolated entirely on a plain white background.
+- id: sunflower_pot
+  type: prop
+  description: A large terracotta pot containing a tall, slightly drooping bright
+    yellow sunflower with large green leaves, isolated entirely on a plain white background.
+- id: sunroom_scenery
+  type: scenery
+  description: A bright, rustic sunroom with warm terracotta tiled floors, wooden
+    shelves filled with gardening tools, and sunlight streaming through large glass
+    windows that overlook a red dirt outback landscape.
+shots:
+- id: 1
+  mode: t2v
+  reference_images:
+  - joey
+  - sunflower_pot
+  - watering_can
+  description: 'Vertical framing. One baby kangaroo sits curiously in a bright, rustic
+    sunroom with terracotta tiled floors and sunlight streaming through large glass
+    windows overlooking a red dirt outback. Beside the baby kangaroo rests one large,
+    heavily oversized galvanized steel watering can and one large terracotta pot containing
+    a tall, slightly drooping bright yellow sunflower. The baby kangaroo tilts its
+    head toward the drooping flower with a gentle, curious expression (one kangaroo
+    total).
+
+    '
+- id: 2
+  mode: i2v
+  description: 'Continuing from the previous frame where the baby kangaroo was sitting
+    curiously next to the pot in the bright sunroom — the baby kangaroo slowly leans
+    forward to sniff the drooping petals of the sunflower, then looks down at the
+    giant watering can. The rustic sunroom remains bathed in warm sunlight over the
+    terracotta tiles (one kangaroo total).
+
+    '
+- id: 3
+  mode: t2v
+  reference_images:
+  - joey
+  - watering_can
+  - sunroom_scenery
+  description: 'Low angle, vertical framing. The baby kangaroo stands upright next
+    to the giant galvanized steel watering can on the terracotta floor of the rustic
+    sunroom with large glass windows. The baby kangaroo places its small front paws
+    against the metal side, pushing gently, but the heavy can does not budge. The
+    baby kangaroo wears a slightly frustrated, determined expression with flattened
+    ears (one kangaroo total).
+
+    '
+- id: 4
+  mode: i2v
+  description: 'Continuing from the previous frame where the baby kangaroo was pushing
+    the heavy watering can in the sunroom — the baby kangaroo pushes harder, causing
+    its small paws to slip slightly on the terracotta floor. The large watering can
+    tilts slightly, spilling a tiny drop of water onto the tiles instead of the flower.
+    The sunroom remains bright and warm (one kangaroo total).
+
+    '
+- id: 5
+  mode: i2v
+  description: 'Continuing from the previous frame where the baby kangaroo slipped
+    while pushing the watering can — the baby kangaroo sits back solidly onto its
+    strong tail, letting go of the can. It looks up at the large metal spout with
+    a thoughtful, wide-eyed, and frustrated expression. The terracotta floor of the
+    sunroom catches the warm sunlight (one kangaroo total).
+
+    '
+- id: 6
+  mode: t2v
+  reference_images:
+  - joey
+  - watering_can
+  - sunflower_pot
+  description: 'Side profile shot, vertical framing. In the bright sunroom with terracotta
+    tiles, the baby kangaroo hops around to the back handle of the giant galvanized
+    watering can, positioning itself perfectly between the can and the terracotta
+    pot containing the drooping sunflower. The baby kangaroo firmly plants its strong
+    hind legs on the floor and uses its thick tail for balance, its face showing deep
+    focus (one kangaroo total).
+
+    '
+- id: 7
+  mode: i2v
+  description: 'Continuing from the previous frame where the baby kangaroo positioned
+    itself behind the watering can in the sunroom — the baby kangaroo uses the leverage
+    of its powerful hind legs to push its body weight forward. The heavy watering
+    can tilts smoothly, and a steady stream of water gently pours from the spout directly
+    into the soil of the sunflower pot (one kangaroo total).
+
+    '
+- id: 8
+  mode: t2v
+  reference_images:
+  - joey
+  - sunflower_pot
+  - sunroom_scenery
+  description: 'Close up, vertical framing. The baby kangaroo''s face is positioned
+    right next to the bright yellow sunflower in the sunlit rustic sunroom. The sunflower
+    now looks perky and vibrant, reaching toward the light. The baby kangaroo''s oversized
+    ears are perked up, and it wears a bright, happy, and proud expression, gazing
+    warmly at the revitalized flower (one kangaroo total).
+
+    '

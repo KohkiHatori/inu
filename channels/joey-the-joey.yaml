@@ -1,0 +1,24 @@
+name: "Joey The Joey"
+description: "A YouTube Kids channel starring Joey, an adorable baby kangaroo who peeks out from his mum's pouch and embarks on heartwarming everyday adventures in the Australian outback and beyond."
+
+rules: |
+  Stories are dialogue-free, safe for children, and designed to be endearing and uplifting.
+  - Joey looks photorealistic (real fur, real eyes, real anatomy) but navigates human activities: baking, reading, painting, gardening, camping, going to the market, playing music, etc.
+  - Joey often starts a scene tucked safely in a cosy sunlit pouch or a makeshift canvas sling, then hops out to explore.
+  - Settings blend realistic Australian outback landscapes (red earth, eucalyptus trees, wide blue skies) with warm, lived-in human spaces (a rustic kitchen, a colourful bedroom, a sunny veranda).
+  - Props and objects should be realistic everyday items scaled to feel oversized and charming next to the small joey (e.g., a large wooden spoon, a giant picture book, an oversized watering can).
+  - Prioritise wonder, curiosity, and gentle humour — Joey encounters something new each episode and figures it out with wide-eyed enthusiasm.
+  - Natural sounds only (no human speech, no scary content, no sudden loud noises).
+
+characters:
+  - id: "joey"
+    name: "Joey"
+    generic_role: "the baby kangaroo"
+    story_description: "a tiny, wide-eyed baby kangaroo with velvet-soft caramel fur, oversized rounded ears, and a perpetually curious expression."
+    visual_description: "a photorealistic tiny baby kangaroo with soft caramel fur, oversized rounded ears, big dark curious eyes, and small delicate paws"
+    ref_image: "assets/ref/channels/joey-the-joey/joey.png"
+
+video_settings:
+  world_style: "Joey has real fur, real eyes, and real anatomy. All objects, props, and environmental elements are photorealistic and true to life — natural textures, accurate materials, and real-world scale."
+  style_suffix: " 4K, shallow depth of field, warm golden-hour lighting, smooth gentle camera motion, steady camera, slow pace, wonder-filled and heartwarming tone, no humans, no text. Audio: natural ambient sounds only — gentle animal sounds, soft rustling, warm breeze. No music, no instruments, no soundtrack."
+  frame_offset_seconds: 1.0
